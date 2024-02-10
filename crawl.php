@@ -1,5 +1,7 @@
 <?php
 set_time_limit(0);
+
+// these can be found in my php_library repo
 require_once("php_library/postVarSet.php");
 require_once("php_library/sQuote.php");
 
