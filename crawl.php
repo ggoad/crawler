@@ -94,7 +94,8 @@ function NextCrawl(){
 		$results[]=[
 			'href'=>$url,
 			'responseCode'=>'500',
-			'data'=>'too many redirects'
+			'data'=>'too many redirects',
+			'responseSuccess'=>false
 		];
 	}
 	
@@ -108,6 +109,7 @@ function NextCrawl(){
 		"http" => [
 			"method" => "GET",
 			"header" => "User-Agent:WAArawler/1.0\r\n",
+			'timeout'=> 120
 		]
 	];
 	$context = stream_context_create($opts);
