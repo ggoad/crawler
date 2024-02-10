@@ -73,7 +73,18 @@ function NextCrawl(){
 	$context = stream_context_create($opts);
 	$resp=@file_get_contents($url, false, $context);
 	
-	
+	if($resp === false){
+		$results[]=[
+			'href'=>$url,
+			'responseCode'=>'599',
+			'responseSuccess'=>false,
+			'headers'=>[],
+			'links'=>[],
+			'problem'=>'failed file get contents'
+			
+		];
+		return NextCrawl();
+	}
 	
 	$respCode=intval(explode(' ',$http_response_header[0])[1]);
 	
@@ -100,7 +111,12 @@ function NextCrawl(){
 		$loc=array_values(array_filter($http_response_header, function($h){return preg_match('/^Location:/i',$h);}));
 		//die(json_encode($loc));,''
 		//if(!$loc){die(json_encode($http_response_header));}
-		array_unshift($crawlArr,['href'=>trim(preg_replace('/^location:/i','',$loc[0])),'parent'=>$thisIndex,'count300'=>$count300+1]);
+		array_unshift($crawlArr,[
+			'href'=>trim(preg_replace('/^location:/i','',$loc[0])),
+			'parent'=>$thisIndex,
+			'count300'=>$count300+1,
+			'noFollow'=>$noFollow
+		]);
 		return NextCrawl();
 	}
 
