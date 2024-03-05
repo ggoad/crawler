@@ -138,7 +138,8 @@ class Crawler
 			'http'=>[
 				'method'=>'GET',
 				'header'=>"User-Agent:".self::$userAgent."\r\n", // you can indicate your own user agent
-				'timeout'=>120  								 // so the crawler won't hang if the remote server doesn't respond
+				'timeout'=>120,  								 // so the crawler won't hang if the remote server doesn't respond
+				'follow_location'=>false                         // we are going to manually follow any 30* redirects, so we don't want them to automatically be sent.
 			]
 		];
 		$context=stream_context_create($opts);
