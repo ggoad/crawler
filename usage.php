@@ -11,7 +11,7 @@ $crawler=new Crawler();
 
 
 // $results is of the type WAAWebCrawler\ArrayOfCrawlResults. 
-$results=$crawler->Crawl("https://greggoad.com");
+$results=$crawler->Crawl("https://yourwebsite.com");
 
 // To get a php array, call $results->getArrayCopy();
 $arr=$results->getArrayCopy();
